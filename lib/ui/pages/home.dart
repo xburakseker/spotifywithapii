@@ -105,10 +105,42 @@ class _HomeState extends State<Home> {
                     const Spacer(),
                     Text(
                       "See more",
-                      style: TextStyle(color: Colors.grey),
-                    )
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                   ],
                 ),
+                SizedBox(
+                  width: 90.w,
+                  height: 35.h,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(top: 3.h),
+                        width: 90.w,
+                        height: 6.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.sp),
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 5,
+                                spreadRadius: 0.1,
+                                offset: Offset(0, 3),
+                              ),
+                            ]),
+                        child: Row(children: []),
+                      );
+                    },
+                  ),
+                )
               ],
             )),
           ),
