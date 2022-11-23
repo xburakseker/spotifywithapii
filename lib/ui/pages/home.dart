@@ -40,109 +40,110 @@ class _HomeState extends State<Home> {
             width: 100.w,
             height: 90.01.h,
             child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
-              children: [
-                SizedBox(
-                  height: 3.h,
-                ),
-                const CoverPage(),
-                SizedBox(
-                  height: 3.h,
-                ),
-                SizedBox(
-                    width: 100.w,
-                    height: 4.h,
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(left: 5.w),
-                          width: 25.w,
-                          child: Text(
-                            newsVs[index],
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        );
-                      },
-                    )),
-                SizedBox(
-                    width: 100.w,
-                    height: 30.h,
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            const ArtistPhoto(),
-                            SongName(songNameList: newsVs[index]),
-                            ArtistName(artistName: newsVs[index]),
-                          ],
-                        );
-                      },
-                    )),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Row(
                   children: [
                     SizedBox(
-                      width: 5.w,
+                      height: 3.h,
                     ),
-                    Text(
-                      "Playlist",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "See more",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500),
+                    const CoverPage(),
+                    SizedBox(
+                      height: 3.h,
                     ),
                     SizedBox(
-                      width: 5.w,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 90.w,
-                  height: 35.h,
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(top: 3.h),
-                        width: 90.w,
-                        height: 6.h,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20.sp),
-                            boxShadow: const [
-                              BoxShadow(
-                                blurRadius: 5,
-                                spreadRadius: 0.1,
-                                offset: Offset(0, 3),
+                        width: 100.w,
+                        height: 4.h,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: 4,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(left: 5.w),
+                              width: 25.w,
+                              child: Text(
+                                newsVs[index],
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
                               ),
-                            ]),
-                        child: Row(children: []),
-                      );
-                    },
-                  ),
-                )
-              ],
-            )),
+                            );
+                          },
+                        )),
+                    SizedBox(
+                        width: 100.w,
+                        height: 30.h,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: 4,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                const ArtistPhoto(),
+                                SongName(songNameList: newsVs[index]),
+                                ArtistName(artistName: newsVs[index]),
+                              ],
+                            );
+                          },
+                        )),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          "Playlist",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const Spacer(),
+                        Text(
+                          "See more",
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 90.w,
+                      height: 35.h,
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(top: 3.h),
+                            width: 90.w,
+                            height: 6.h,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20.sp),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 5,
+                                    spreadRadius: 0.1,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ]),
+                            child: Row(children: []),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                )),
           ),
         ]),
       ),
