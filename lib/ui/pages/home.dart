@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // TODO: implement initState
-    Albums().getArtistData();
+    Provider.of<AlbumsViewModel>(context).getArtistWithId();
     super.initState();
   }
 
