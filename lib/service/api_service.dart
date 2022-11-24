@@ -1,14 +1,12 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/services.dart';
 import 'package:dio/dio.dart';
 import 'package:spotifywithapi/models/albums_ex.dart';
 
-class Albums {
-  Future<AlbumsEx?> getArtistData() async {
+class ArtistsService {
+  Future<ArtistsModel?> getArtistData() async {
     Map<String, String> requestHeaders = {
       'authorization':
-          'Bearer BQAemIh4X2M6-NYfhUmlUEspsYEXDCFBYuGWjEazJvf4ZVAltqYlkiQiAXw94O3G4F2d3TM_3I__eqQjYrvAgumprR2UA0cEisfh8ANgQeb0XOFVe5LRPW5yOD24blZ2udv33RfAXHr4_CX0VaiXa7QQJpU-w8oHKES00mYdSb5PKL2VS0aGkvWs36qKwCuGZVgnRhCkcjWcyJrWEapHRWx_I7ZYC1-Dq946klxL8A0_kJe2C4MSNuONs22eIpr-HkhnJ0Pkb5Y7uT8ulyztKPW9LWY67KdL9wxGTC8DKiBO',
+          'Bearer BQDRiNu1QRVsUy91Ltag0fnzG9UmRGG9LeSSbP5TpC3957nzgDs-O2vWy4rNO9BHw5Qd1RW4rFjtgofcxYpvDsela0_OZQjVkBvmVtFX2RBaXLGyPkDqfVN2rhMb-CFs803EXkDV9ilClo047xjR9H7o7bqr6lP_1LdaWs03IAKidf8Mas2_OKM5_sQ47RKGEnW3KC-2E84fsMp_8Cku_8B-wZJwQY1QoyRtxOV2-eAPkSYgDYom4wR8BBgKwkqK5FexZ4CjGxmWVRFxAWRiDAXzG7X15fSu49FBEnSLK-T7',
       'Content-type': 'application/json',
     };
 
@@ -18,17 +16,14 @@ class Albums {
     ("https://api.collectapi.com/health/dutyPharmacy?ilce=Çankaya&il=Ankara"), headers: requestHeaders);
     spotifyResponse = SpotifyList.fromJson(jsonDecode(response.body));*/
 
-      final response = await dio.get("browse/categories",
+      final response = await dio.get("artists",
           queryParameters: {
-            'country': 'TR',
-            'locale': 'tr_TR',
-            'limit': '10',
-            'offset': '5',
+            'ids':
+                '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6',
+            'Accept': 'application/json',
           },
           options: Options(headers: requestHeaders));
-
-      return AlbumsEx.fromJson(response.data);
-      ;
+      return ArtistsModel.fromJson(response.data);
     } catch (e) {
       log(e.toString());
     }

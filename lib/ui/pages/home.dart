@@ -26,10 +26,11 @@ class _HomeState extends State<Home> {
     "Artist",
     "Podcasts",
   ];
+
   @override
   void initState() {
+    Provider.of<AlbumsViewModel>(context, listen: false).getArtistWithId();
     // TODO: implement initState
-    Provider.of<AlbumsViewModel>(context).getArtistWithId();
     super.initState();
   }
 
@@ -80,29 +81,33 @@ class _HomeState extends State<Home> {
                           );
                         },
                       )),
-                  SizedBox(
-                      width: 100.w,
-                      height: 40.h,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 4,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              const ArtistPhoto(),
-                              SongName(songNameList: newsVs[index]),
-                              Consumer(
-                                builder:
-                                    (context, AlbumsViewModel value, child) =>
-                                        value.isLoadingArtistWithId
-                                            ? const CircularProgressIndicator()
-                                            : ArtistName(artistName: ""),
-                              )
-                            ],
-                          );
-                        },
-                      )),
+                  Consumer(
+                    builder: (context, AlbumsViewModel value, child) =>
+                        value.isLoadingArtistWithId
+                            ? const CircularProgressIndicator()
+                            : SizedBox(
+                                width: 100.w,
+                                height: 40.h,
+                                child: ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: value.artists!.artists!.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        ArtistPhoto(
+                                            imageNetwork: value.artists!
+                                                .artists![index].images![0].url
+                                                .toString()),
+                                        ArtistName(
+                                            artistName: value
+                                                .artists!.artists![index].name
+                                                .toString()),
+                                      ],
+                                    );
+                                  },
+                                )),
+                  ),
                   SizedBox(
                     height: 4.h,
                   ),
