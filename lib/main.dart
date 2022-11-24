@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:spotifywithapi/ui/pages/home.dart';
+import 'package:spotifywithapi/provider/provider.dart';
+import 'package:spotifywithapi/ui/bottom_nav_bar.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (_) => AlbumsViewModel(),
+      )
+    ], builder: (context, child) => MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +23,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return const GetMaterialApp(
-          home: Home(),
+          home: BottomNavBar(),
         );
       },
     );
