@@ -9,8 +9,11 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
+        create: (_) => ArtistViewModel(),
+      ),
+      ChangeNotifierProvider(
         create: (_) => AlbumsViewModel(),
-      )
+      ),
     ], builder: (context, child) => MyApp()),
   );
 }

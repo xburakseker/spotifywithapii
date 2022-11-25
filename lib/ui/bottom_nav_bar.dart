@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spotifywithapi/ui/pages/artist_profile.dart';
+import 'package:spotifywithapi/ui/pages/artist_screen.dart';
 import 'package:spotifywithapi/ui/pages/home.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -8,10 +10,6 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  void _incrementCounter() {
-    setState(() {});
-  }
-
   int _selectedIndex = 0;
 
   @override
@@ -45,11 +43,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
 Widget switchPage(int index) {
   switch (index) {
     case 0:
-      return Home();
+      return const Home();
     case 1:
-      return Container();
+      return const ProfileScreen();
     case 2:
-      return Container();
+      return const ArtistProfileScreen();
     default:
       return Container();
   }
