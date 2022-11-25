@@ -12,7 +12,7 @@ class ArtistSongsWidgetState extends State<ArtistSongsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 2.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +27,7 @@ class ArtistSongsWidgetState extends State<ArtistSongsWidget> {
                 color: Colors.grey,
               )),
           SizedBox(
-            width: 10,
+            width: 5.w,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -15,6 +15,7 @@ class _ArtistAlbumsWidgetState extends State<ArtistAlbumsWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
+          margin: EdgeInsets.only(left: 3.w),
           width: 35.w,
           height: 15.h,
           decoration: BoxDecoration(

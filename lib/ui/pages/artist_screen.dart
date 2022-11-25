@@ -20,43 +20,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(
             width: 100.w,
             height: 90.h,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 100.w,
-                  height: 35.h,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40))),
-                  child: const ProfileTopWidget(),
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 23),
-                  child: const Text(
-                    "PUBLIC PLAYLIST",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 100.w,
+                    height: 35.h,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(40),
+                            bottomRight: Radius.circular(40))),
+                    child: const ProfileTopWidget(),
                   ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 46.9.h,
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 9,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return const PlaylistSongWidget();
-                    },
+                  SizedBox(
+                    height: 2.h,
                   ),
-                )
-              ],
+                  Container(
+                    margin: const EdgeInsets.only(left: 23),
+                    child: const Text(
+                      "PUBLIC PLAYLIST",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 46.9.h,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: 9,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return const PlaylistSongWidget();
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

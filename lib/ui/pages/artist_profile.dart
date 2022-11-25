@@ -69,6 +69,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                     child: ListView.builder(
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: 3,
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return const ArtistAlbumsWidget();
@@ -98,7 +99,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 20.h,
+                    height: 25.h,
                     child: ListView.builder(
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: 3,
