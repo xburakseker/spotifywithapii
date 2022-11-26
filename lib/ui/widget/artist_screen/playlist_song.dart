@@ -39,9 +39,13 @@ class _PlaylistSongWidgetState extends State<PlaylistSongWidget> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.playListName,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              SizedBox(
+                width: 65.w,
+                child: Text(
+                  widget.playListName,
+                  style:
+                      TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+                ),
               ),
               Text(widget.playListOwner)
             ],

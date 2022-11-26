@@ -72,19 +72,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Consumer(
                     builder: (context, GeneralViewModel value, child) {
                       return value.isLoadingMyPlaylist
-                          ? CircularProgressIndicator()
+                          ? const CircularProgressIndicator()
                           : SizedBox(
                               width: double.infinity,
                               height: 80.h,
                               child: ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
-                                itemCount: 1,
+                                itemCount: value.myPlaylist!.items!.length,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return PlaylistSongWidget(
                                     playListPhoto:
-                                        "${value.myPlaylist!.items![index].images![index].url}",
+                                        "${value.myPlaylist!.items![index].images![0].url}",
                                     playListName:
                                         "${value.myPlaylist!.items![index].name}",
                                     playListOwner:
