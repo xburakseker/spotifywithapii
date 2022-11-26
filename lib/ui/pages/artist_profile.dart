@@ -23,6 +23,14 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
     super.initState();
   }
 
+  void ucgenAlanHesapla() {
+    int uzunluk = 1;
+    int yukseklik = 2;
+
+    double sonuc = (yukseklik * uzunluk) / 2;
+    print("$sonuc");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
