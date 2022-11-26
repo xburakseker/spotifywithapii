@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ArtistAlbumsWidget extends StatefulWidget {
-  const ArtistAlbumsWidget({super.key});
+  ArtistAlbumsWidget(
+      {super.key, required this.albumImage, required this.albumName});
+  String albumImage;
+  String albumName;
 
   @override
   State<ArtistAlbumsWidget> createState() => _ArtistAlbumsWidgetState();
@@ -15,18 +18,21 @@ class _ArtistAlbumsWidgetState extends State<ArtistAlbumsWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
-          margin: EdgeInsets.only(left: 3.w),
+          margin: EdgeInsets.only(left: 5.w),
           width: 35.w,
-          height: 15.h,
+          height: 35.w,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25), color: Colors.grey),
+              image: DecorationImage(
+                  image: NetworkImage(widget.albumImage), fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.grey),
         ),
         SizedBox(
           height: 1.h,
         ),
-        const Text(
-          "Album Name",
-          style: TextStyle(fontWeight: FontWeight.w500),
+        Text(
+          widget.albumName,
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
         ),
       ],
     );

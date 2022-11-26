@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ProfileTopWidget extends StatefulWidget {
-  const ProfileTopWidget({super.key});
+  ProfileTopWidget(
+      {super.key,
+      required this.userName,
+      required this.userPhoto,
+      required this.userFollowers});
+  String userName;
+  String userPhoto;
+  String userFollowers;
 
   @override
   State<ProfileTopWidget> createState() => _ProfileTopWidgetState();
@@ -14,89 +21,63 @@ class _ProfileTopWidgetState extends State<ProfileTopWidget> {
     return Column(
       children: [
         SizedBox(
-          height: 0.5.h,
+          height: 2.h,
         ),
         Row(
           children: [
-            SizedBox(
-              width: 5.w,
-            ),
-            Container(
-              width: 10.w,
-              height: 10.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.keyboard_arrow_left_outlined,
-                  size: 20.sp,
-                ),
-              ),
-            ),
             const Spacer(),
+            SizedBox(
+              width: 10.w,
+            ),
             const Text(
               "Profile",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
-            const Icon(Icons.more_vert),
-            SizedBox(
-              width: 5.w,
-            ),
+            Container(
+                margin: EdgeInsets.only(right: 5.w),
+                child: const Icon(Icons.more_vert)),
           ],
         ),
         Container(
           width: 28.w,
           height: 28.w,
-          margin: EdgeInsets.only(top: 1.h),
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            ),
-          ], shape: BoxShape.circle, color: Colors.grey),
+          margin: EdgeInsets.only(top: 1.5.h),
+          decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(widget.userPhoto)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+              shape: BoxShape.circle,
+              color: Colors.grey),
         ),
         SizedBox(
           height: 1.5.h,
         ),
-        const Text("deneme123@gmail.com",
-            style: TextStyle(fontStyle: FontStyle.italic)),
+
         SizedBox(
           height: 1.5.h,
         ), //usermail
 
-        const Text(
-          "fdb123", //username
-          style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+        Text(
+          widget.userName, //username
+          style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 1.5.h,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text("778",
-                style: TextStyle(
-                    fontSize: 22, fontWeight: FontWeight.bold)), //followers
-            Text("243",
-                style: TextStyle(
-                    fontSize: 22, fontWeight: FontWeight.bold)), //following
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Text("Followers"),
-            Text("Following"),
+
+        Column(
+          children: [
+            Text(widget.userFollowers,
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+            Text("Followers",
+                style: TextStyle(fontSize: 16.sp, color: Colors.grey)),
           ],
         ),
       ],

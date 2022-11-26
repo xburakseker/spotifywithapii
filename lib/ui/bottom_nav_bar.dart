@@ -21,6 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
         ],
         selectedItemColor: const Color(0xff1ED760),
@@ -45,9 +46,11 @@ Widget switchPage(int index) {
     case 0:
       return const Home();
     case 1:
-      return const ProfileScreen();
+      return Container();
     case 2:
       return const ArtistProfileScreen();
+    case 3:
+      return const ProfileScreen();
     default:
       return Container();
   }

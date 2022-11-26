@@ -25,8 +25,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    Provider.of<ArtistViewModel>(context, listen: false).getArtistWithId();
-    Provider.of<AlbumsViewModel>(context, listen: false).getAlbum();
+    Provider.of<GeneralViewModel>(context, listen: false).getArtistWithId();
+    Provider.of<GeneralViewModel>(context, listen: false).getAlbum();
     // TODO: implement initState
     super.initState();
   }
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                     height: 3.h,
                   ),
                   Consumer(
-                    builder: (context, AlbumsViewModel value, child) {
+                    builder: (context, GeneralViewModel value, child) {
                       return value.isLoadingAlbum
                           ? const CircularProgressIndicator()
                           : CoverPage(
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                         },
                       )),
                   Consumer(
-                    builder: (context, ArtistViewModel value, child) =>
+                    builder: (context, GeneralViewModel value, child) =>
                         value.isLoadingArtistWithId
                             ? const CircularProgressIndicator()
                             : SizedBox(
@@ -142,7 +142,7 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   Consumer(
-                    builder: (context, AlbumsViewModel value, child) {
+                    builder: (context, GeneralViewModel value, child) {
                       return value.isLoadingAlbum
                           ? const CircularProgressIndicator()
                           : SizedBox(

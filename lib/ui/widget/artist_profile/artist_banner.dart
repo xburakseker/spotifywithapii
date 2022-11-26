@@ -17,14 +17,12 @@ class _ArtistBannerWidgetState extends State<ArtistBannerWidget> {
         Container(
           width: 100.w,
           height: 30.h,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(40),
                 bottomRight: Radius.circular(40)),
-          ),
-          child: Image.network(
-            widget.artistPhoto,
-            fit: BoxFit.contain,
+            image: DecorationImage(
+                image: NetworkImage(widget.artistPhoto), fit: BoxFit.cover),
           ),
         ),
         const Positioned(

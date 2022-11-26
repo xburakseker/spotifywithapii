@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:spotifywithapi/provider/provider.dart';
 import 'package:spotifywithapi/ui/widget/artist_screen/playlist_song.dart';
 import 'package:spotifywithapi/ui/widget/artist_screen/profile_top.dart';
 
@@ -12,56 +14,87 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    Provider.of<GeneralViewModel>(context, listen: false).getMyPlaylist();
+    Provider.of<GeneralViewModel>(context, listen: false).getUserProfile();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Stack(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: Column(
         children: [
-          SizedBox(
+          Container(
+            color: Colors.grey.shade200,
             width: 100.w,
-            height: 90.h,
+            height: 89.8.h,
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 100.w,
-                    height: 35.h,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(40),
-                            bottomRight: Radius.circular(40))),
-                    child: const ProfileTopWidget(),
+                  Consumer(
+                    builder: (context, GeneralViewModel value, child) {
+                      return value.isLoadingUserProfile
+                          ? const CircularProgressIndicator()
+                          : Container(
+                              width: 100.w,
+                              height: 37.h,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(30.sp),
+                                      bottomRight: Radius.circular(30.sp))),
+                              child: ProfileTopWidget(
+                                userName: "${value.userProfile!.displayName}",
+                                userPhoto:
+                                    "${value.userProfile!.images![0].url}",
+                                userFollowers:
+                                    "${value.userProfile!.followers!.total}",
+                              ),
+                            );
+                    },
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 3.h,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 23),
-                    child: const Text(
-                      "PUBLIC PLAYLIST",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    margin: EdgeInsets.only(left: 5.w, bottom: 0.75.h),
+                    child: Text(
+                      "PUBLIC PLAYLISTS",
+                      style: TextStyle(
+                          fontSize: 16.5.sp, fontWeight: FontWeight.w700),
                     ),
                   ),
-                  SizedBox(
-                    height: 2.h,
+                  Consumer(
+                    builder: (context, GeneralViewModel value, child) {
+                      return value.isLoadingMyPlaylist
+                          ? CircularProgressIndicator()
+                          : SizedBox(
+                              width: double.infinity,
+                              height: 80.h,
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                itemCount: 1,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return PlaylistSongWidget(
+                                    playListPhoto:
+                                        "${value.myPlaylist!.items![index].images![index].url}",
+                                    playListName:
+                                        "${value.myPlaylist!.items![index].name}",
+                                    playListOwner:
+                                        "${value.myPlaylist!.items![index].owner!.displayName}",
+                                  );
+                                },
+                              ),
+                            );
+                    },
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 46.9.h,
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: 9,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return const PlaylistSongWidget();
-                      },
-                    ),
-                  )
                 ],
               ),
             ),

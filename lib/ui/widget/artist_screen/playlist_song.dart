@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PlaylistSongWidget extends StatefulWidget {
-  const PlaylistSongWidget({super.key});
+  PlaylistSongWidget(
+      {super.key,
+      required this.playListPhoto,
+      required this.playListName,
+      required this.playListOwner});
+  String playListPhoto;
+  String playListName;
+  String playListOwner;
 
   @override
   State<PlaylistSongWidget> createState() => _PlaylistSongWidgetState();
@@ -20,7 +27,11 @@ class _PlaylistSongWidgetState extends State<PlaylistSongWidget> {
             width: 13.w,
             height: 13.w,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Colors.grey),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey,
+                image: DecorationImage(
+                    image: NetworkImage(widget.playListPhoto),
+                    fit: BoxFit.cover)),
           ),
           SizedBox(
             width: 5.w,
@@ -29,10 +40,10 @@ class _PlaylistSongWidgetState extends State<PlaylistSongWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Dont Smile At Me",
+                widget.playListName,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Text("Billie Eilish")
+              Text(widget.playListOwner)
             ],
           ),
           Spacer(),

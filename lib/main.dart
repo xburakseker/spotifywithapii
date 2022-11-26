@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotifywithapi/provider/provider.dart';
@@ -9,12 +8,9 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
-        create: (_) => ArtistViewModel(),
+        create: (_) => GeneralViewModel(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => AlbumsViewModel(),
-      ),
-    ], builder: (context, child) => MyApp()),
+    ], builder: (context, child) => const MyApp()),
   );
 }
 
@@ -25,7 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return const GetMaterialApp(
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: BottomNavBar(),
         );
       },

@@ -17,14 +17,16 @@ class ArtistProfileScreen extends StatefulWidget {
 class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
   @override
   void initState() {
-    Provider.of<ArtistViewModel>(context, listen: false).getArtistWithId();
+    Provider.of<GeneralViewModel>(context, listen: false).getAlbumDetail();
+    Provider.of<GeneralViewModel>(context, listen: false).getArtistDetail();
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       width: 100.w,
       height: 93.h,
       child: SingleChildScrollView(
@@ -34,23 +36,22 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Consumer(
-              builder: (context, ArtistViewModel value, child) {
-                return value.isLoadingArtistWithId
+              builder: (context, GeneralViewModel value, child) {
+                return value.isLoadingArtistDetail
                     ? const CircularProgressIndicator()
                     : ArtistBannerWidget(
-                        artistPhoto: value.artists!.artists![2].images![2].url
-                            .toString(),
+                        artistPhoto: "${value.artistDetails!.images![0].url}",
                       );
               },
             ),
             Consumer(
-              builder: (context, ArtistViewModel value, child) {
-                return value.isLoadingArtistWithId
+              builder: (context, GeneralViewModel value, child) {
+                return value.isLoadingArtistDetail
                     ? const CircularProgressIndicator()
                     : Center(
                         child: ArtisInfoWidget(
-                        artistName: value.artists!.artists![2].name.toString(),
-                        explain: value.artists!.artists![2].type.toString(),
+                        artistName: "${value.artistDetails!.name}",
+                        explain: "${value.artistDetails!.genres}",
                       ));
               },
             ),
@@ -65,14 +66,25 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    height: 20.h,
+                    height: 23.h,
                     child: ListView.builder(
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: 3,
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return const ArtistAlbumsWidget();
+                        return Consumer(
+                          builder: (context, GeneralViewModel value, child) {
+                            return value.isLoadingAlbumDetail
+                                ? const CircularProgressIndicator()
+                                : ArtistAlbumsWidget(
+                                    albumImage:
+                                        "${value.albumDetails!.tracks![index].album!.images![index].url}",
+                                    albumName:
+                                        "${value.albumDetails!.tracks![index].album!.name}",
+                                  );
+                          },
+                        );
                       },
                     ),
                   ),
