@@ -13,13 +13,16 @@ class _ArtistPhotoState extends State<ArtistPhoto> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 5.w),
+      margin: EdgeInsets.only(left: 5.w, top: 1.h),
       width: 33.w,
-      height: 22.h,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(22.sp)),
-      child: Image.network(
-        widget.imageNetwork,
-      ),
+      height: 33.w,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22.sp),
+          image: DecorationImage(
+            image: NetworkImage(
+              widget.imageNetwork,
+            ),
+          )),
     );
   }
 }

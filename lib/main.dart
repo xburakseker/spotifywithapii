@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotifywithapi/provider/provider.dart';
-import 'package:spotifywithapi/ui/bottom_nav_bar.dart';
+import 'package:spotifywithapi/ui/pages/artist_profile.dart';
+import 'package:spotifywithapi/ui/pages/artist_screen.dart';
+import 'package:spotifywithapi/ui/pages/home.dart';
+import 'package:spotifywithapi/ui/pages/search.dart';
 
 void main() {
   runApp(
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: BottomNavBar(),
+          home: MyHomePage(),
         );
       },
     );
@@ -37,44 +40,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<Widget> pages = [
+    const Home(),
+    const SearchPage(),
+    ArtistProfileScreen(),
+    const ProfileScreen(),
+  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: 100.w,
-        height: 100.h,
-        color: Colors.black.withOpacity(0.5),
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: 15,
-          itemBuilder: (context, index) {
-            return Container(
-              width: 90.w,
-              height: 15.h,
-              margin: EdgeInsets.only(top: 3.h),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.sp),
-                  boxShadow: const [
-                    BoxShadow(
-                        blurRadius: 1, spreadRadius: 1, offset: Offset(0, 3)),
-                  ]),
-              child: Row(children: [
-                Container(
-                  width: 10.w,
-                  height: 10.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100.sp)),
-                  child: SizedBox(),
-                ),
-                Column(
-                  children: [Text("")],
-                ),
-              ]),
-            );
-          },
-        ),
-      ),
+    return Consumer(
+      builder: (context, GeneralViewModel value, child) {
+        return Scaffold(
+          body: pages[value.selectedIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined), label: ''),
+              BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+            ],
+            selectedItemColor: const Color(0xff1ED760),
+            backgroundColor: Colors.white,
+            iconSize: 28,
+            unselectedItemColor: Colors.grey,
+            currentIndex: value.selectedIndex,
+            onTap: (index) {
+              value.onItemTapped(index);
+            },
+          ),
+        );
+      },
     );
   }
 }

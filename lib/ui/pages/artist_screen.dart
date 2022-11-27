@@ -17,7 +17,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     Provider.of<GeneralViewModel>(context, listen: false).getMyPlaylist();
     Provider.of<GeneralViewModel>(context, listen: false).getUserProfile();
-    // TODO: implement initState
     super.initState();
   }
 

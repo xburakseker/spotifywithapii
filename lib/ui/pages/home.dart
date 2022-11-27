@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotifywithapi/provider/provider.dart';
+import 'package:spotifywithapi/ui/pages/categories_detail.dart';
 import 'package:spotifywithapi/ui/widget/home_widgets/appbar.dart';
 import 'package:spotifywithapi/ui/widget/home_widgets/artist_name.dart';
 import 'package:spotifywithapi/ui/widget/home_widgets/artist_photo.dart';
 import 'package:spotifywithapi/ui/widget/home_widgets/cover_page.dart';
 import 'package:spotifywithapi/ui/widget/home_widgets/playlist.dart';
+import 'package:spotifywithapi/ui/widget/search_screen/categories.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -27,7 +29,8 @@ class _HomeState extends State<Home> {
   void initState() {
     Provider.of<GeneralViewModel>(context, listen: false).getArtistWithId();
     Provider.of<GeneralViewModel>(context, listen: false).getAlbum();
-    // TODO: implement initState
+    Provider.of<GeneralViewModel>(context, listen: false).getCategories();
+    Provider.of<GeneralViewModel>(context, listen: false).getCategoriesDetail();
     super.initState();
   }
 
@@ -68,49 +71,37 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 3.h,
                   ),
-                  SizedBox(
-                      width: 100.w,
-                      height: 4.h,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 4,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(left: 5.w),
-                            width: 25.w,
-                            child: Text(
-                              newsVs[index],
-                              style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          );
-                        },
-                      )),
+                  Container(
+                    width: 90.w,
+                    margin: EdgeInsets.only(bottom: 0.5.h),
+                    child: Text(
+                      "New Albums",
+                      style: TextStyle(
+                          fontSize: 17.5.sp, fontWeight: FontWeight.w600),
+                    ),
+                  ),
                   Consumer(
                     builder: (context, GeneralViewModel value, child) =>
-                        value.isLoadingArtistWithId
+                        value.isLoadingAlbum
                             ? const CircularProgressIndicator()
                             : SizedBox(
                                 width: 100.w,
                                 height: 32.h,
                                 child: ListView.builder(
                                   physics: const BouncingScrollPhysics(),
-                                  itemCount: value.artists!.artists!.length,
+                                  itemCount: value.albums!.albums!.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       children: [
                                         ArtistPhoto(
-                                            imageNetwork: value.artists!
-                                                .artists![index].images![0].url
-                                                .toString()),
+                                            imageNetwork:
+                                                "${value.albums!.albums![index].images![0].url}"),
                                         ArtistName(
-                                            artistName: value
-                                                .artists!.artists![index].name
-                                                .toString()),
+                                            albumName:
+                                                "${value.albums!.albums![index].artists![0].name}",
+                                            artistName:
+                                                "${value.albums!.albums![index].name}"),
                                       ],
                                     );
                                   },
@@ -125,7 +116,7 @@ class _HomeState extends State<Home> {
                         width: 5.w,
                       ),
                       Text(
-                        "Playlist",
+                        "Categories",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.sp,
@@ -143,30 +134,34 @@ class _HomeState extends State<Home> {
                   ),
                   Consumer(
                     builder: (context, GeneralViewModel value, child) {
-                      return value.isLoadingAlbum
+                      return value.isLoadingCategories
                           ? const CircularProgressIndicator()
-                          : SizedBox(
-                              width: 100.w,
-                              height: 32.h,
-                              child: ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: value.albums!.albums!.length,
-                                itemBuilder: (context, index) {
-                                  return PlayListOnHomePage(
-                                    artistName:
-                                        "${value.albums!.albums![index].name}",
-                                    songTime: "5.33",
-                                    labelName:
-                                        "${value.albums!.albums![index].label}",
-                                    iconPlay: GestureDetector(
-                                        onTap: () {
-                                          value.albums!.albums![index].tracks!
-                                              .items![index].previewUrl;
-                                        },
-                                        child: Icon(Icons.play_arrow_outlined)),
-                                  );
-                                },
-                              ));
+                          : GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CategoriesDetail(),
+                                    ));
+                              },
+                              child: SizedBox(
+                                width: 90.w,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: 10,
+                                  itemBuilder: (context, index) {
+                                    return CategoriesWidget(
+                                      categoriesPhoto:
+                                          "${value.categories!.categories!.items![index].icons![0].url}",
+                                      categoriesText:
+                                          "${value.categories!.categories!.items![index].name}",
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
                     },
                   ),
                 ],

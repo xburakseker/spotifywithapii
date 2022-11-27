@@ -4,7 +4,11 @@ import 'package:spotifywithapi/models/album_detail_model.dart';
 import 'package:spotifywithapi/models/album_model.dart';
 import 'package:spotifywithapi/models/artist_details_model.dart';
 import 'package:spotifywithapi/models/artist_model.dart';
+import 'package:spotifywithapi/models/categories_detail_model.dart';
+import 'package:spotifywithapi/models/categories_model.dart';
 import 'package:spotifywithapi/models/my_playlist_model.dart';
+import 'package:spotifywithapi/models/search_artist_model.dart';
+import 'package:spotifywithapi/models/top_track_model.dart';
 import 'package:spotifywithapi/models/user_profile_model.dart';
 import 'package:spotifywithapi/service/api_service.dart';
 
@@ -66,6 +70,52 @@ class GeneralViewModel with ChangeNotifier {
     isLoadingUserProfile = true;
     userProfile = await GeneralService().getUserProfile();
     isLoadingUserProfile = false;
+    notifyListeners();
+  }
+
+  CategoriesModel? categories;
+  bool isLoadingCategories = true;
+
+  getCategories() async {
+    isLoadingCategories = true;
+    categories = await GeneralService().getCategories();
+    isLoadingCategories = false;
+    notifyListeners();
+  }
+
+  CategoriesDetailModel? categoriesDetail;
+  bool isLoadingCategoriesDetail = true;
+
+  getCategoriesDetail() async {
+    isLoadingCategoriesDetail = true;
+    categoriesDetail = await GeneralService().getCategoriesDetail();
+    isLoadingCategoriesDetail = false;
+    notifyListeners();
+  }
+
+  TopTracksModel? topTrack;
+  bool isLoadingTopTrack = true;
+
+  getTopTrack() async {
+    isLoadingTopTrack = true;
+    topTrack = await GeneralService().getTopTracks();
+    isLoadingTopTrack = false;
+    notifyListeners();
+  }
+
+  SearchArtistModel? searchArtist;
+  bool isLoadingSearchArtist = true;
+
+  getSearchArtist(String artistName) async {
+    isLoadingSearchArtist = true;
+    searchArtist = await GeneralService().getSearchArtist(artistName);
+    isLoadingSearchArtist = false;
+    notifyListeners();
+  }
+
+  int selectedIndex = 0;
+  void onItemTapped(int index) {
+    selectedIndex = index;
     notifyListeners();
   }
 }

@@ -1,4 +1,71 @@
-class ArtistDetailsModel {
+class SearchArtistModel {
+  Artists? artists;
+
+  SearchArtistModel({this.artists});
+
+  SearchArtistModel.fromJson(Map<String, dynamic> json) {
+    artists =
+        json['artists'] != null ? Artists.fromJson(json['artists']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (artists != null) {
+      data['artists'] = artists!.toJson();
+    }
+    return data;
+  }
+}
+
+class Artists {
+  String? href;
+  List<Items>? items;
+  int? limit;
+  String? next;
+  int? offset;
+  String? previous;
+  int? total;
+
+  Artists(
+      {this.href,
+      this.items,
+      this.limit,
+      this.next,
+      this.offset,
+      this.previous,
+      this.total});
+
+  Artists.fromJson(Map<String, dynamic> json) {
+    href = json['href'];
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
+    limit = json['limit'];
+    next = json['next'];
+    offset = json['offset'];
+    previous = json['previous'];
+    total = json['total'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['href'] = href;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    data['limit'] = limit;
+    data['next'] = next;
+    data['offset'] = offset;
+    data['previous'] = previous;
+    data['total'] = total;
+    return data;
+  }
+}
+
+class Items {
   ExternalUrls? externalUrls;
   Followers? followers;
   List<String>? genres;
@@ -10,7 +77,7 @@ class ArtistDetailsModel {
   String? type;
   String? uri;
 
-  ArtistDetailsModel(
+  Items(
       {this.externalUrls,
       this.followers,
       this.genres,
@@ -22,7 +89,7 @@ class ArtistDetailsModel {
       this.type,
       this.uri});
 
-  ArtistDetailsModel.fromJson(Map<String, dynamic> json) {
+  Items.fromJson(Map<String, dynamic> json) {
     externalUrls = json['external_urls'] != null
         ? ExternalUrls.fromJson(json['external_urls'])
         : null;
@@ -83,7 +150,7 @@ class ExternalUrls {
 }
 
 class Followers {
-  Null href;
+  Null? href;
   int? total;
 
   Followers({this.href, this.total});

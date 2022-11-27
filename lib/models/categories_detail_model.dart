@@ -1,4 +1,24 @@
-class MyPlaylistModel {
+class CategoriesDetailModel {
+  Playlists? playlists;
+
+  CategoriesDetailModel({this.playlists});
+
+  CategoriesDetailModel.fromJson(Map<String, dynamic> json) {
+    playlists = json['playlists'] != null
+        ? Playlists.fromJson(json['playlists'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (playlists != null) {
+      data['playlists'] = playlists!.toJson();
+    }
+    return data;
+  }
+}
+
+class Playlists {
   String? href;
   List<Items>? items;
   int? limit;
@@ -7,7 +27,7 @@ class MyPlaylistModel {
   String? previous;
   int? total;
 
-  MyPlaylistModel(
+  Playlists(
       {this.href,
       this.items,
       this.limit,
@@ -16,7 +36,7 @@ class MyPlaylistModel {
       this.previous,
       this.total});
 
-  MyPlaylistModel.fromJson(Map<String, dynamic> json) {
+  Playlists.fromJson(Map<String, dynamic> json) {
     href = json['href'];
     if (json['items'] != null) {
       items = <Items>[];
@@ -56,7 +76,7 @@ class Items {
   String? name;
   Owner? owner;
   Null primaryColor;
-  bool? public;
+  Null public;
   String? snapshotId;
   Tracks? tracks;
   String? type;
@@ -147,9 +167,9 @@ class ExternalUrls {
 }
 
 class Images {
-  int? height;
+  Null height;
   String? url;
-  int? width;
+  Null width;
 
   Images({this.height, this.url, this.width});
 

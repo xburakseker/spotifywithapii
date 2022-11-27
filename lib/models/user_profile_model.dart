@@ -31,20 +31,20 @@ class UserProfileModel {
     displayName = json['display_name'];
     email = json['email'];
     explicitContent = json['explicit_content'] != null
-        ? new ExplicitContent.fromJson(json['explicit_content'])
+        ? ExplicitContent.fromJson(json['explicit_content'])
         : null;
     externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
+        ? ExternalUrls.fromJson(json['external_urls'])
         : null;
     followers = json['followers'] != null
-        ? new Followers.fromJson(json['followers'])
+        ? Followers.fromJson(json['followers'])
         : null;
     href = json['href'];
     id = json['id'];
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
     product = json['product'];
@@ -53,27 +53,27 @@ class UserProfileModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['country'] = this.country;
-    data['display_name'] = this.displayName;
-    data['email'] = this.email;
-    if (this.explicitContent != null) {
-      data['explicit_content'] = this.explicitContent!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['country'] = country;
+    data['display_name'] = displayName;
+    data['email'] = email;
+    if (explicitContent != null) {
+      data['explicit_content'] = explicitContent!.toJson();
     }
-    if (this.externalUrls != null) {
-      data['external_urls'] = this.externalUrls!.toJson();
+    if (externalUrls != null) {
+      data['external_urls'] = externalUrls!.toJson();
     }
-    if (this.followers != null) {
-      data['followers'] = this.followers!.toJson();
+    if (followers != null) {
+      data['followers'] = followers!.toJson();
     }
-    data['href'] = this.href;
-    data['id'] = this.id;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    data['href'] = href;
+    data['id'] = id;
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
-    data['product'] = this.product;
-    data['type'] = this.type;
-    data['uri'] = this.uri;
+    data['product'] = product;
+    data['type'] = type;
+    data['uri'] = uri;
     return data;
   }
 }
@@ -90,9 +90,9 @@ class ExplicitContent {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['filter_enabled'] = this.filterEnabled;
-    data['filter_locked'] = this.filterLocked;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['filter_enabled'] = filterEnabled;
+    data['filter_locked'] = filterLocked;
     return data;
   }
 }
@@ -107,14 +107,14 @@ class ExternalUrls {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['spotify'] = this.spotify;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['spotify'] = spotify;
     return data;
   }
 }
 
 class Followers {
-  Null? href;
+  Null href;
   int? total;
 
   Followers({this.href, this.total});
@@ -125,17 +125,17 @@ class Followers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['href'] = this.href;
-    data['total'] = this.total;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['href'] = href;
+    data['total'] = total;
     return data;
   }
 }
 
 class Images {
-  Null? height;
+  Null height;
   String? url;
-  Null? width;
+  Null width;
 
   Images({this.height, this.url, this.width});
 
@@ -146,10 +146,10 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['height'] = this.height;
-    data['url'] = this.url;
-    data['width'] = this.width;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['height'] = height;
+    data['url'] = url;
+    data['width'] = width;
     return data;
   }
 }

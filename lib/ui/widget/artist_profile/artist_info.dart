@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ArtisInfoWidget extends StatefulWidget {
-  ArtisInfoWidget({super.key, required this.artistName, required this.explain});
+  ArtisInfoWidget(
+      {super.key,
+      required this.artistName,
+      required this.explain,
+      required this.popularity,
+      required this.followers});
   String artistName;
   String explain;
+  String popularity;
+  String followers;
 
   @override
   State<ArtisInfoWidget> createState() => _ArtisInfoWidgetState();
@@ -21,12 +28,16 @@ class _ArtisInfoWidgetState extends State<ArtisInfoWidget> {
         children: [
           Text(
             widget.artistName,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           ),
-          const Text("2 Album, 67 Track"),
+          Text(
+              "Popularity :${widget.popularity}, Followers : ${widget.followers} "),
           Text(
             widget.explain,
-            style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
+            style: TextStyle(
+                color: Colors.grey,
+                fontSize: 15.sp,
+                fontStyle: FontStyle.italic),
           )
         ],
       ),

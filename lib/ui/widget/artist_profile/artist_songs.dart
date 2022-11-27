@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ArtistSongsWidget extends StatefulWidget {
-  const ArtistSongsWidget({super.key});
+  ArtistSongsWidget(
+      {super.key, required this.songName, required this.artistName});
+  String songName;
+  String artistName;
 
   @override
   State<ArtistSongsWidget> createState() => ArtistSongsWidgetState();
@@ -18,13 +21,18 @@ class ArtistSongsWidgetState extends State<ArtistSongsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-              onTap: () {
-                //incoming
-              },
+              onTap: () {},
               child: Container(
                 width: 8.w,
                 height: 8.w,
-                color: Colors.grey,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(100.sp)),
+                child: Icon(
+                  Icons.play_arrow_rounded,
+                  color: Colors.black.withOpacity(0.5),
+                ),
               )),
           SizedBox(
             width: 5.w,
@@ -32,18 +40,20 @@ class ArtistSongsWidgetState extends State<ArtistSongsWidget> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Dont Smile At me",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              SizedBox(
+                width: 76.w,
+                child: Text(
+                  widget.songName,
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                ),
               ),
               SizedBox(
                 height: 1.h,
               ),
-              Text("Billie Eilish")
+              SizedBox(width: 76.w, child: Text(widget.artistName))
             ],
           ),
-          Spacer(),
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite))
         ],
       ),
     );

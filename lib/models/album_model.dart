@@ -7,15 +7,15 @@ class AlbumModel {
     if (json['albums'] != null) {
       albums = <Albums>[];
       json['albums'].forEach((v) {
-        albums!.add(new Albums.fromJson(v));
+        albums!.add(Albums.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.albums != null) {
-      data['albums'] = this.albums!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (albums != null) {
+      data['albums'] = albums!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -64,20 +64,20 @@ class Albums {
     if (json['artists'] != null) {
       artists = <Artists>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artists.fromJson(v));
+        artists!.add(Artists.fromJson(v));
       });
     }
     if (json['copyrights'] != null) {
       copyrights = <Copyrights>[];
       json['copyrights'].forEach((v) {
-        copyrights!.add(new Copyrights.fromJson(v));
+        copyrights!.add(Copyrights.fromJson(v));
       });
     }
     externalIds = json['external_ids'] != null
-        ? new ExternalIds.fromJson(json['external_ids'])
+        ? ExternalIds.fromJson(json['external_ids'])
         : null;
     externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
+        ? ExternalUrls.fromJson(json['external_urls'])
         : null;
 
     href = json['href'];
@@ -85,7 +85,7 @@ class Albums {
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
     label = json['label'];
@@ -94,44 +94,43 @@ class Albums {
     releaseDate = json['release_date'];
     releaseDatePrecision = json['release_date_precision'];
     totalTracks = json['total_tracks'];
-    tracks =
-        json['tracks'] != null ? new Tracks.fromJson(json['tracks']) : null;
+    tracks = json['tracks'] != null ? Tracks.fromJson(json['tracks']) : null;
     type = json['type'];
     uri = json['uri'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['album_type'] = this.albumType;
-    if (this.artists != null) {
-      data['artists'] = this.artists!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['album_type'] = albumType;
+    if (artists != null) {
+      data['artists'] = artists!.map((v) => v.toJson()).toList();
     }
-    if (this.copyrights != null) {
-      data['copyrights'] = this.copyrights!.map((v) => v.toJson()).toList();
+    if (copyrights != null) {
+      data['copyrights'] = copyrights!.map((v) => v.toJson()).toList();
     }
-    if (this.externalIds != null) {
-      data['external_ids'] = this.externalIds!.toJson();
+    if (externalIds != null) {
+      data['external_ids'] = externalIds!.toJson();
     }
-    if (this.externalUrls != null) {
-      data['external_urls'] = this.externalUrls!.toJson();
+    if (externalUrls != null) {
+      data['external_urls'] = externalUrls!.toJson();
     }
 
-    data['href'] = this.href;
-    data['id'] = this.id;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    data['href'] = href;
+    data['id'] = id;
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
-    data['label'] = this.label;
-    data['name'] = this.name;
-    data['popularity'] = this.popularity;
-    data['release_date'] = this.releaseDate;
-    data['release_date_precision'] = this.releaseDatePrecision;
-    data['total_tracks'] = this.totalTracks;
-    if (this.tracks != null) {
-      data['tracks'] = this.tracks!.toJson();
+    data['label'] = label;
+    data['name'] = name;
+    data['popularity'] = popularity;
+    data['release_date'] = releaseDate;
+    data['release_date_precision'] = releaseDatePrecision;
+    data['total_tracks'] = totalTracks;
+    if (tracks != null) {
+      data['tracks'] = tracks!.toJson();
     }
-    data['type'] = this.type;
-    data['uri'] = this.uri;
+    data['type'] = type;
+    data['uri'] = uri;
     return data;
   }
 }
@@ -149,7 +148,7 @@ class Artists {
 
   Artists.fromJson(Map<String, dynamic> json) {
     externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
+        ? ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
@@ -159,15 +158,15 @@ class Artists {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.externalUrls != null) {
-      data['external_urls'] = this.externalUrls!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (externalUrls != null) {
+      data['external_urls'] = externalUrls!.toJson();
     }
-    data['href'] = this.href;
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['uri'] = this.uri;
+    data['href'] = href;
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    data['uri'] = uri;
     return data;
   }
 }
@@ -182,8 +181,8 @@ class ExternalUrls {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['spotify'] = this.spotify;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['spotify'] = spotify;
     return data;
   }
 }
@@ -200,9 +199,9 @@ class Copyrights {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['text'] = this.text;
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['text'] = text;
+    data['type'] = type;
     return data;
   }
 }
@@ -217,8 +216,8 @@ class ExternalIds {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['upc'] = this.upc;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['upc'] = upc;
     return data;
   }
 }
@@ -237,10 +236,10 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['height'] = this.height;
-    data['url'] = this.url;
-    data['width'] = this.width;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['height'] = height;
+    data['url'] = url;
+    data['width'] = width;
     return data;
   }
 }
@@ -259,7 +258,7 @@ class Tracks {
     if (json['items'] != null) {
       items = <Items>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(Items.fromJson(v));
       });
     }
     limit = json['limit'];
@@ -268,14 +267,14 @@ class Tracks {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['href'] = this.href;
-    if (this.items != null) {
-      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['href'] = href;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
-    data['limit'] = this.limit;
-    data['offset'] = this.offset;
-    data['total'] = this.total;
+    data['limit'] = limit;
+    data['offset'] = offset;
+    data['total'] = total;
     return data;
   }
 }
@@ -318,14 +317,14 @@ class Items {
     if (json['artists'] != null) {
       artists = <Artists>[];
       json['artists'].forEach((v) {
-        artists!.add(new Artists.fromJson(v));
+        artists!.add(Artists.fromJson(v));
       });
     }
     discNumber = json['disc_number'];
     durationMs = json['duration_ms'];
     explicit = json['explicit'];
     externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
+        ? ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
@@ -337,32 +336,32 @@ class Items {
     type = json['type'];
     uri = json['uri'];
     linkedFrom = json['linked_from'] != null
-        ? new LinkedFrom.fromJson(json['linked_from'])
+        ? LinkedFrom.fromJson(json['linked_from'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.artists != null) {
-      data['artists'] = this.artists!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (artists != null) {
+      data['artists'] = artists!.map((v) => v.toJson()).toList();
     }
-    data['disc_number'] = this.discNumber;
-    data['duration_ms'] = this.durationMs;
-    data['explicit'] = this.explicit;
-    if (this.externalUrls != null) {
-      data['external_urls'] = this.externalUrls!.toJson();
+    data['disc_number'] = discNumber;
+    data['duration_ms'] = durationMs;
+    data['explicit'] = explicit;
+    if (externalUrls != null) {
+      data['external_urls'] = externalUrls!.toJson();
     }
-    data['href'] = this.href;
-    data['id'] = this.id;
-    data['is_local'] = this.isLocal;
-    data['is_playable'] = this.isPlayable;
-    data['name'] = this.name;
-    data['preview_url'] = this.previewUrl;
-    data['track_number'] = this.trackNumber;
-    data['type'] = this.type;
-    data['uri'] = this.uri;
-    if (this.linkedFrom != null) {
-      data['linked_from'] = this.linkedFrom!.toJson();
+    data['href'] = href;
+    data['id'] = id;
+    data['is_local'] = isLocal;
+    data['is_playable'] = isPlayable;
+    data['name'] = name;
+    data['preview_url'] = previewUrl;
+    data['track_number'] = trackNumber;
+    data['type'] = type;
+    data['uri'] = uri;
+    if (linkedFrom != null) {
+      data['linked_from'] = linkedFrom!.toJson();
     }
     return data;
   }
@@ -379,7 +378,7 @@ class LinkedFrom {
 
   LinkedFrom.fromJson(Map<String, dynamic> json) {
     externalUrls = json['external_urls'] != null
-        ? new ExternalUrls.fromJson(json['external_urls'])
+        ? ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
@@ -388,14 +387,14 @@ class LinkedFrom {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.externalUrls != null) {
-      data['external_urls'] = this.externalUrls!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (externalUrls != null) {
+      data['external_urls'] = externalUrls!.toJson();
     }
-    data['href'] = this.href;
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['uri'] = this.uri;
+    data['href'] = href;
+    data['id'] = id;
+    data['type'] = type;
+    data['uri'] = uri;
     return data;
   }
 }

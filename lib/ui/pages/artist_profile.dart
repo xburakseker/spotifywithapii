@@ -8,7 +8,9 @@ import 'package:spotifywithapi/ui/widget/artist_profile/artist_info.dart';
 import 'package:spotifywithapi/ui/widget/artist_profile/artist_songs.dart';
 
 class ArtistProfileScreen extends StatefulWidget {
-  const ArtistProfileScreen({super.key});
+  ArtistProfileScreen({
+    super.key,
+  });
 
   @override
   State<ArtistProfileScreen> createState() => _ArtistProfileScreenState();
@@ -19,16 +21,8 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
   void initState() {
     Provider.of<GeneralViewModel>(context, listen: false).getAlbumDetail();
     Provider.of<GeneralViewModel>(context, listen: false).getArtistDetail();
-    // TODO: implement initState
+    Provider.of<GeneralViewModel>(context, listen: false).getTopTrack();
     super.initState();
-  }
-
-  void ucgenAlanHesapla() {
-    int uzunluk = 1;
-    int yukseklik = 2;
-
-    double sonuc = (yukseklik * uzunluk) / 2;
-    print("$sonuc");
   }
 
   @override
@@ -58,6 +52,8 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                     ? const CircularProgressIndicator()
                     : Center(
                         child: ArtisInfoWidget(
+                        followers: "${value.artistDetails!.followers!.total}",
+                        popularity: "${value.artistDetails!.popularity}",
                         artistName: "${value.artistDetails!.name}",
                         explain: "${value.artistDetails!.genres}",
                       ));
@@ -72,30 +68,28 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                     "Albums",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 23.h,
-                    child: ListView.builder(
-                      padding: const EdgeInsets.only(top: 15),
-                      itemCount: 3,
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Consumer(
-                          builder: (context, GeneralViewModel value, child) {
-                            return value.isLoadingAlbumDetail
-                                ? const CircularProgressIndicator()
-                                : ArtistAlbumsWidget(
-                                    albumImage:
-                                        "${value.albumDetails!.tracks![index].album!.images![index].url}",
-                                    albumName:
-                                        "${value.albumDetails!.tracks![index].album!.name}",
-                                  );
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  Consumer(builder: (context, GeneralViewModel value, child) {
+                    return value.isLoadingAlbumDetail
+                        ? const CircularProgressIndicator()
+                        : SizedBox(
+                            width: double.infinity,
+                            height: 23.h,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(top: 15),
+                              itemCount: value.albumDetails!.tracks!.length,
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return ArtistAlbumsWidget(
+                                  albumImage:
+                                      "${value.albumDetails!.tracks![index].album!.images![0].url}",
+                                  albumName:
+                                      "${value.albumDetails!.tracks![index].album!.name}",
+                                );
+                              },
+                            ),
+                          );
+                  }),
                   SizedBox(
                     height: 3.h,
                   ),
@@ -117,18 +111,29 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 25.h,
-                    child: ListView.builder(
-                      padding: const EdgeInsets.only(top: 15),
-                      itemCount: 3,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        return const ArtistSongsWidget();
-                      },
-                    ),
+                  Consumer(
+                    builder: (context, GeneralViewModel value, child) {
+                      return value.isLoadingTopTrack
+                          ? CircularProgressIndicator()
+                          : SizedBox(
+                              width: double.infinity,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.only(top: 15),
+                                itemCount: value.topTrack!.tracks!.length,
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return ArtistSongsWidget(
+                                    artistName:
+                                        "${value.topTrack!.tracks![index].artists![0].name}",
+                                    songName:
+                                        "${value.topTrack!.tracks![index].name}",
+                                  );
+                                },
+                              ),
+                            );
+                    },
                   )
                 ],
               ),

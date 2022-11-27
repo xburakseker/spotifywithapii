@@ -44,7 +44,8 @@ class _ProfileTopWidgetState extends State<ProfileTopWidget> {
           height: 28.w,
           margin: EdgeInsets.only(top: 1.5.h),
           decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(widget.userPhoto)),
+              image: DecorationImage(
+                  image: NetworkImage(widget.userPhoto), fit: BoxFit.cover),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),

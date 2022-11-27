@@ -50,8 +50,8 @@ class _PlaylistSongWidgetState extends State<PlaylistSongWidget> {
               Text(widget.playListOwner)
             ],
           ),
-          Spacer(),
-          Icon(Icons.more_horiz)
+          const Spacer(),
+          const Icon(Icons.more_horiz)
         ],
       ),
     );

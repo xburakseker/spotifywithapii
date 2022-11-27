@@ -1,13 +1,13 @@
-class AlbumDetailsModel {
+class TopTracksModel {
   List<Tracks>? tracks;
 
-  AlbumDetailsModel({this.tracks});
+  TopTracksModel({this.tracks});
 
-  AlbumDetailsModel.fromJson(Map<String, dynamic> json) {
+  TopTracksModel.fromJson(Map<String, dynamic> json) {
     if (json['tracks'] != null) {
       tracks = <Tracks>[];
       json['tracks'].forEach((v) {
-        tracks!.add(Tracks.fromJson(v));
+        tracks!.add(new Tracks.fromJson(v));
       });
     }
   }
@@ -60,21 +60,21 @@ class Tracks {
       this.uri});
 
   Tracks.fromJson(Map<String, dynamic> json) {
-    album = json['album'] != null ? Album.fromJson(json['album']) : null;
+    album = json['album'] != null ? new Album.fromJson(json['album']) : null;
     if (json['artists'] != null) {
       artists = <Artists>[];
       json['artists'].forEach((v) {
-        artists!.add(Artists.fromJson(v));
+        artists!.add(new Artists.fromJson(v));
       });
     }
     discNumber = json['disc_number'];
     durationMs = json['duration_ms'];
     explicit = json['explicit'];
     externalIds = json['external_ids'] != null
-        ? ExternalIds.fromJson(json['external_ids'])
+        ? new ExternalIds.fromJson(json['external_ids'])
         : null;
     externalUrls = json['external_urls'] != null
-        ? ExternalUrls.fromJson(json['external_urls'])
+        ? new ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
@@ -152,18 +152,18 @@ class Album {
     if (json['artists'] != null) {
       artists = <Artists>[];
       json['artists'].forEach((v) {
-        artists!.add(Artists.fromJson(v));
+        artists!.add(new Artists.fromJson(v));
       });
     }
     externalUrls = json['external_urls'] != null
-        ? ExternalUrls.fromJson(json['external_urls'])
+        ? new ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(Images.fromJson(v));
+        images!.add(new Images.fromJson(v));
       });
     }
     name = json['name'];
@@ -211,7 +211,7 @@ class Artists {
 
   Artists.fromJson(Map<String, dynamic> json) {
     externalUrls = json['external_urls'] != null
-        ? ExternalUrls.fromJson(json['external_urls'])
+        ? new ExternalUrls.fromJson(json['external_urls'])
         : null;
     href = json['href'];
     id = json['id'];
