@@ -106,10 +106,13 @@ class GeneralViewModel with ChangeNotifier {
   SearchArtistModel? searchArtist;
   bool isLoadingSearchArtist = true;
 
-  getSearchArtist(String artistName) async {
+  getSearchArtist(String? id) async {
     isLoadingSearchArtist = true;
-    searchArtist = await GeneralService().getSearchArtist(artistName);
-    isLoadingSearchArtist = false;
+    searchArtist = await GeneralService().getSearchArtist(id);
+    if (searchArtist.runtimeType == SearchArtistModel) {
+      isLoadingSearchArtist = false;
+    }
+
     notifyListeners();
   }
 
