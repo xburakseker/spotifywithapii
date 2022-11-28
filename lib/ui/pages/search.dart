@@ -49,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
                             onTap: () {
                               Provider.of<GeneralViewModel>(context,
                                       listen: false)
-                                  .getArtistWithIdd(
+                                  .getArtistWithAlbum(
                                       "${value.searchArtist!.artists!.items![index].id}");
 
                               Navigator.push(

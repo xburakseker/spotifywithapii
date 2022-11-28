@@ -35,10 +35,11 @@ class _ArtistSearchViewPageState extends State<ArtistSearchViewPage> {
             children: [
               Consumer(
                 builder: (context, GeneralViewModel value, child) {
-                  return value.isLoadingArtistWithIdd
+                  return value.isLoadingArtistWithAlbum
                       ? const CircularProgressIndicator()
                       : ArtistBannerWidget(
-                          artistPhoto: "${value.artistWithId!.images![0].url}",
+                          artistPhoto:
+                              "${value.artistWithAlbum!.items![0].images![0].url}",
                         );
                 },
               ),
