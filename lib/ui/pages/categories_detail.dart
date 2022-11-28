@@ -14,13 +14,6 @@ class CategoriesDetail extends StatefulWidget {
 
 class _CategoriesDetailState extends State<CategoriesDetail> {
   @override
-  void initState() {
-    Provider.of<GeneralViewModel>(context, listen: false).getCategoriesDetail();
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

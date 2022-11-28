@@ -3,9 +3,13 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CategoriesWidget extends StatefulWidget {
   CategoriesWidget(
-      {super.key, required this.categoriesPhoto, required this.categoriesText});
+      {super.key,
+      required this.categoriesPhoto,
+      required this.categoriesText,
+      required this.id});
   String categoriesPhoto;
   String categoriesText;
+  String id;
 
   @override
   State<CategoriesWidget> createState() => _CategoriesWidgetState();

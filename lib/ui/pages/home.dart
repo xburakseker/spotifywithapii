@@ -24,13 +24,13 @@ class _HomeState extends State<Home> {
     "Artist",
     "Podcasts",
   ];
+  String? id;
 
   @override
   void initState() {
     Provider.of<GeneralViewModel>(context, listen: false).getArtistWithId();
     Provider.of<GeneralViewModel>(context, listen: false).getAlbum();
     Provider.of<GeneralViewModel>(context, listen: false).getCategories();
-    Provider.of<GeneralViewModel>(context, listen: false).getCategoriesDetail();
     super.initState();
   }
 
@@ -136,30 +136,35 @@ class _HomeState extends State<Home> {
                     builder: (context, GeneralViewModel value, child) {
                       return value.isLoadingCategories
                           ? const CircularProgressIndicator()
-                          : GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CategoriesDetail(),
-                                    ));
-                              },
-                              child: SizedBox(
-                                width: 90.w,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: 10,
-                                  itemBuilder: (context, index) {
-                                    return CategoriesWidget(
+                          : SizedBox(
+                              width: 90.w,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Provider.of<GeneralViewModel>(context,
+                                              listen: false)
+                                          .getCategoriesDetail(
+                                              "${value.categories?.categories!.items![index].id}");
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CategoriesDetail(),
+                                          ));
+                                    },
+                                    child: CategoriesWidget(
+                                      id: "${value.categories!.categories!.items![index].id}",
                                       categoriesPhoto:
                                           "${value.categories!.categories!.items![index].icons![0].url}",
                                       categoriesText:
                                           "${value.categories!.categories!.items![index].name}",
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
                     },

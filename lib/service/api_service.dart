@@ -15,7 +15,7 @@ class GeneralService {
   Dio dio = Dio(BaseOptions(baseUrl: "https://api.spotify.com/v1/"));
   Map<String, String> requestHeaders = {
     'authorization':
-        'Bearer BQBp2A7MuA8Sv78KkfULJGaVCdEAMwLezoiT2Or8zM3tC1LKqqJwp7ex2wh3pUK6LX9FIwOn8ctYNx8MQakzInkBODX8Wfqjo1eiz7n3onIxUtZzyfCLtGLYGeqOM4hmTpqN0Qtgwdp_IzsssDRd5RGt4bVqbdfxjM45TQYOdkx9UeNwSqmnhDCy18xNuI70YNkqVrdG2NovLMyjtXPFYm39AdRhzci5IYJUepdUxlpLUnTyjxxt0TvKeqfuFLtwp8xNGg7BGY_gn-NmBwevsaEhfTNbaWEkRDtsf48YSlU0',
+        'Bearer BQBetL8xrpQwwyE6SsBsGBrvR5LxxjFawnFyrw4oFbeXub5U4S9Cy71Lg1EMkn4noeuFDEjN8q-Jzl0MFCZuj6rLqM7tuxKprIEF774KaRk0QMfh5yYyCIu90a4VwsI9ITy2H07BXNmXNcNMzygRuOD5WLjGVUcPpaU_thCrIhm7gU1NYuV6-bGVtdkBCiV1erY4BKiYpvPZ9Bb459VRWFcCwUbTFZMqUVY17lggc2fatoTVPXMrrduJ2JvIeQq7zpyd6kVB_lV5HcIb-to6I0zMcdUdwP2aVYgqWdBVVQ',
     'Content-type': 'application/json',
     'Accept': 'application/json'
   };
@@ -119,16 +119,16 @@ class GeneralService {
     return null;
   }
 
-  Future<CategoriesDetailModel?> getCategoriesDetail() async {
+  Future<CategoriesDetailModel?> getCategoriesDetail(String? id) async {
     try {
-      final response =
-          await dio.get("browse/categories/0JQ5DAqbMKFEZPnFQSFB1T/playlists",
-              queryParameters: {
-                'country': 'SE',
-                'limit': '10',
-                'offset': '5',
-              },
-              options: Options(headers: requestHeaders));
+      final response = await dio.get("browse/categories/$id/playlists",
+          queryParameters: {
+            'country': 'SE',
+            'limit': '10',
+            'offset': '5',
+          },
+          options: Options(headers: requestHeaders));
+      print(response.data);
       return CategoriesDetailModel.fromJson(response.data);
     } catch (e) {
       log(e.toString());

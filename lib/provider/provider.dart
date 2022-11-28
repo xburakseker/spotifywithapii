@@ -86,9 +86,9 @@ class GeneralViewModel with ChangeNotifier {
   CategoriesDetailModel? categoriesDetail;
   bool isLoadingCategoriesDetail = true;
 
-  getCategoriesDetail() async {
+  getCategoriesDetail(String? id) async {
     isLoadingCategoriesDetail = true;
-    categoriesDetail = await GeneralService().getCategoriesDetail();
+    categoriesDetail = await GeneralService().getCategoriesDetail(id);
     isLoadingCategoriesDetail = false;
     notifyListeners();
   }
