@@ -45,8 +45,10 @@ class _SearchPageState extends State<SearchPage> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return ArtistSearchView(
-                              artistPhoto:
-                                  "${value.searchArtist!.artists!.items![index].images![0].url}",
+                              artistPhoto: value.searchArtist!.artists!
+                                      .items![index].images!.isEmpty
+                                  ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wix.com%2Fwebsite%2Ftemplates%2Fhtml%2Fblank&psig=AOvVaw0rZV3C9lk9aEmaUvyl0rK3&ust=1669711499268000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLjq-fW-0PsCFQAAAAAdAAAAABAE"
+                                  : "${value.searchArtist!.artists!.items![index].images![0].url}",
                               artistName:
                                   "${value.searchArtist!.artists!.items![index].name}",
                               anyData:

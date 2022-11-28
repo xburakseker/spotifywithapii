@@ -29,6 +29,15 @@ class _SearchTextFieldState extends State<SearchTextField> {
       margin: EdgeInsets.only(top: 2.h),
       child: TextField(
         controller: controller,
+        onChanged: (value) {
+          id = value;
+          if (controller.text.isNotEmpty) {
+            Future.delayed(const Duration(seconds: 1), () {
+              Provider.of<GeneralViewModel>(context, listen: false)
+                  .getSearchArtist(id);
+            });
+          }
+        },
         style: TextStyle(
             fontSize: 18.sp,
             color: Colors.grey.shade500,
@@ -44,18 +53,9 @@ class _SearchTextFieldState extends State<SearchTextField> {
             ),
             borderRadius: BorderRadius.circular(50.0),
           ),
-          prefixIcon: InkWell(
-            onTap: () {
-              id = controller.text;
-              if (controller.text.isNotEmpty) {
-                Provider.of<GeneralViewModel>(context, listen: false)
-                    .getSearchArtist(id);
-              }
-            },
-            child: Icon(
-              Icons.search,
-              color: Colors.grey.shade500,
-            ),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey.shade500,
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(

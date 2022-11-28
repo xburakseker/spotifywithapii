@@ -15,7 +15,7 @@ class GeneralService {
   Dio dio = Dio(BaseOptions(baseUrl: "https://api.spotify.com/v1/"));
   Map<String, String> requestHeaders = {
     'authorization':
-        'Bearer BQBetL8xrpQwwyE6SsBsGBrvR5LxxjFawnFyrw4oFbeXub5U4S9Cy71Lg1EMkn4noeuFDEjN8q-Jzl0MFCZuj6rLqM7tuxKprIEF774KaRk0QMfh5yYyCIu90a4VwsI9ITy2H07BXNmXNcNMzygRuOD5WLjGVUcPpaU_thCrIhm7gU1NYuV6-bGVtdkBCiV1erY4BKiYpvPZ9Bb459VRWFcCwUbTFZMqUVY17lggc2fatoTVPXMrrduJ2JvIeQq7zpyd6kVB_lV5HcIb-to6I0zMcdUdwP2aVYgqWdBVVQ',
+        'Bearer BQCBkfsZQCpmyeaoI4-kSMt2uJ5VxZdUl_OgVGHyQRSRKh6LD_m9IfjhJTm8zR_gCD5rPmm_FwRDzrEK8_feusNc6zIQYVLXnrcWHMMMfmMdGx25GQ9iw2QCe_Dw0Y7g_40fPowae37-C-2ryMmIPryri5molHeAO-smVuPzAHui9f_IN-yCQtE2OZsuBr7840DfDCoIOQSP6F_S4PFc3l5UI8Plcp0lwUCFQ9SQLNRE9dQ1l9gHcPVPACwZHDYDd9D2O57FlivX57ESqaOgl0YE5PeBZA9wO8kQzUM9Pbrc',
     'Content-type': 'application/json',
     'Accept': 'application/json'
   };
