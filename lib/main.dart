@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Consumer(
       builder: (context, GeneralViewModel value, child) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: pages[value.selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

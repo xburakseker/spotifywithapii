@@ -32,6 +32,14 @@ class _ArtistBannerWidgetState extends State<ArtistBannerWidget> {
               Icons.more_vert,
               size: 30,
               color: Colors.white,
+            )),
+        const Positioned(
+            top: 35,
+            left: 30,
+            child: Icon(
+              Icons.arrow_back,
+              size: 30,
+              color: Colors.white,
             ))
       ],
     );

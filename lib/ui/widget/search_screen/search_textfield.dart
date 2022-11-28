@@ -14,11 +14,6 @@ class SearchTextField extends StatefulWidget {
 
 class _SearchTextFieldState extends State<SearchTextField> {
   String? id;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   TextEditingController controller = TextEditingController();
   @override

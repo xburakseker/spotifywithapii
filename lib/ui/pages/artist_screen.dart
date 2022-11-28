@@ -49,8 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       bottomRight: Radius.circular(30.sp))),
                               child: ProfileTopWidget(
                                 userName: "${value.userProfile!.displayName}",
-                                userPhoto:
-                                    "${value.userProfile!.images![0].url}",
+                                userPhoto: value.userProfile!.images!.isEmpty
+                                    ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wix.com%2Fwebsite%2Ftemplates%2Fhtml%2Fblank&psig=AOvVaw0rZV3C9lk9aEmaUvyl0rK3&ust=1669711499268000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLjq-fW-0PsCFQAAAAAdAAAAABAE"
+                                    : "${value.userProfile!.images![0].url}",
                                 userFollowers:
                                     "${value.userProfile!.followers!.total}",
                               ),
