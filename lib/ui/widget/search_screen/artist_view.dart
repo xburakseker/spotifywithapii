@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ArtistSearchView extends StatefulWidget {
-  ArtistSearchView(
-      {super.key,
-      required this.artistPhoto,
-      required this.artistName,
-      required this.anyData});
+  ArtistSearchView({
+    super.key,
+    required this.artistPhoto,
+    required this.artistName,
+  });
   String artistPhoto;
   String artistName;
-  String anyData;
 
   @override
   State<ArtistSearchView> createState() => _ArtistSearchViewState();
@@ -18,40 +17,35 @@ class ArtistSearchView extends StatefulWidget {
 class _ArtistSearchViewState extends State<ArtistSearchView> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      alignment: Alignment.center,
+      width: 38.w,
       padding: EdgeInsets.symmetric(vertical: 0.8.h, horizontal: 5.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      margin: EdgeInsets.only(top: 2.h),
+      child: Column(
         children: [
           Container(
-            width: 13.w,
-            height: 13.w,
+            width: 22.w,
+            height: 22.w,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(50.sp),
                 color: Colors.grey,
                 image: DecorationImage(
                     image: NetworkImage(widget.artistPhoto),
                     fit: BoxFit.cover)),
           ),
           SizedBox(
-            width: 5.w,
+            height: 2.w,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 65.w,
-                child: Text(
-                  widget.artistName,
-                  style:
-                      TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Text(widget.anyData)
-            ],
+          SizedBox(
+            child: Text(
+              widget.artistName,
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black.withOpacity(0.8)),
+            ),
           ),
-          const Spacer(),
-          const Icon(Icons.more_horiz)
         ],
       ),
     );

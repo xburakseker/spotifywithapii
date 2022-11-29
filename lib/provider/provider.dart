@@ -4,6 +4,8 @@ import 'package:spotifywithapi/models/album_detail_model.dart';
 import 'package:spotifywithapi/models/album_id_model.dart';
 import 'package:spotifywithapi/models/album_model.dart';
 import 'package:spotifywithapi/models/artist_details_model.dart';
+import 'package:spotifywithapi/models/artist_id_album_model.dart';
+import 'package:spotifywithapi/models/artist_id_top_tracks_model.dart';
 import 'package:spotifywithapi/models/artist_model.dart';
 import 'package:spotifywithapi/models/artist_with_album_model.dart';
 import 'package:spotifywithapi/models/artist_with_id_model.dart';
@@ -112,10 +114,7 @@ class GeneralViewModel with ChangeNotifier {
   getSearchArtist(String? id) async {
     isLoadingSearchArtist = true;
     searchArtist = await GeneralService().getSearchArtist(id);
-    print(searchArtist!.artists!.items![1].id);
-
     isLoadingSearchArtist = false;
-
     notifyListeners();
   }
 
@@ -125,9 +124,7 @@ class GeneralViewModel with ChangeNotifier {
   getAlbumId(String? id) async {
     isLoadingAlbumId = true;
     albumId = await GeneralService().getAlbumId(id);
-
     isLoadingAlbumId = false;
-
     notifyListeners();
   }
 
@@ -137,21 +134,37 @@ class GeneralViewModel with ChangeNotifier {
   getArtistWithAlbum(String? id) async {
     isLoadingArtistWithAlbum = true;
     artistWithAlbum = await GeneralService().getArtistWithAlbum(id);
-
     isLoadingArtistWithAlbum = false;
-
     notifyListeners();
   }
 
-  ArtistWithIdModel? artistWithId;
+  ArtistWithIdModel? artistWithIdd;
   bool isLoadingArtistWithIdd = true;
 
   getArtistWithIdd(String? id) async {
     isLoadingArtistWithIdd = true;
-    artistWithId = await GeneralService().getArtistWithId(id);
-
+    artistWithIdd = await GeneralService().getArtistWithIdd(id);
     isLoadingArtistWithIdd = false;
+    notifyListeners();
+  }
 
+  ArtistIdAlbumModel? artistIdAlbum;
+  bool isLoadingArtistIdAlbum = true;
+
+  getArtistIdAlbum(String? id) async {
+    isLoadingArtistIdAlbum = true;
+    artistIdAlbum = await GeneralService().getArtistIdAlbum(id);
+    isLoadingArtistIdAlbum = false;
+    notifyListeners();
+  }
+
+  ArtistIdTopTracksModel? artistIdTopTracks;
+  bool isLoadingArtistIdTopTracks = true;
+
+  getArtistIdTopTrack(String? id) async {
+    isLoadingArtistIdTopTracks = true;
+    artistIdTopTracks = await GeneralService().getArtistIdTopTrack(id);
+    isLoadingArtistIdTopTracks = false;
     notifyListeners();
   }
 

@@ -4,6 +4,8 @@ import 'package:spotifywithapi/models/album_detail_model.dart';
 import 'package:spotifywithapi/models/album_id_model.dart';
 import 'package:spotifywithapi/models/album_model.dart';
 import 'package:spotifywithapi/models/artist_details_model.dart';
+import 'package:spotifywithapi/models/artist_id_album_model.dart';
+import 'package:spotifywithapi/models/artist_id_top_tracks_model.dart';
 import 'package:spotifywithapi/models/artist_model.dart';
 import 'package:spotifywithapi/models/artist_with_album_model.dart';
 import 'package:spotifywithapi/models/artist_with_id_model.dart';
@@ -18,7 +20,7 @@ class GeneralService {
   Dio dio = Dio(BaseOptions(baseUrl: "https://api.spotify.com/v1/"));
   static const Map<String, String> requestHeaders = {
     'authorization':
-        'Bearer BQB9LfNKvt00WT0xd-r_M-Jwfin5cfmfxhVRxTu16T_erlUfIhxbmeBxU9q9R1MQ8rzygoFi__Koe-FImnPHxQzwXt6r1XRcAs4d-ouJCq1DXBCp2aRBVKNZbzeZRIx4weQ3n5tQR1cKy5X5yQ_VDbITMxfUyGM2yRzdC1XgMfCwK77E6k3c333QFWu5GlDVxd5dV6etTXCX8kBU_iB1IgSJRpksRdng3QQUdTJIQd_pxhWf_VJIcY_XaNGHTHycXuNB6eoI0YTGoExjNlRSSY5dkw9mcEfwaH_JJchAJlVB',
+        'Bearer BQB9PzimJezej15Nyimh8e-AQzAmrbBfx7UTbBPTOuNbSzifGa8LF_uYAJ4-iGNcKEuMqfJHS_d9D2fu_zofYIgR2uRWHUmLR89buHOJ7T5qDU8XtdYj1CcmiMAPa_xaDTFudBRl9Bc1z_SIzMMu2qFOsmQENAlmcIyTOVGnsD8pMiNc1fGdXHPqXa5eDTIhmCziyOAm04bKVHoaHuxYieQ_23kB4ppjjQCm7-5ZjnocyWHDKJCM7p7pvYVQmazaHR5ACjLj4X8rtA7LX3jBNlYVuP8nXzvh78FAvTMMAnvT',
     'Content-type': 'application/json',
     'Accept': 'application/json'
   };
@@ -206,14 +208,47 @@ class GeneralService {
     return null;
   }
 
-  Future<ArtistWithIdModel?> getArtistWithId(String? id) async {
+  Future<ArtistWithIdModel?> getArtistWithIdd(String? id) async {
     try {
-      final response = await dio.get("artists/$id/albums",
+      final response = await dio.get("artists/$id",
           queryParameters: {
             'q': id,
           },
           options: Options(headers: requestHeaders));
       return ArtistWithIdModel.fromJson(response.data);
+    } catch (e) {
+      log(e.toString());
+    }
+    return null;
+  }
+
+  Future<ArtistIdAlbumModel?> getArtistIdAlbum(String? id) async {
+    try {
+      final response = await dio.get("artists/$id/albums",
+          queryParameters: {
+            'q': id,
+            'include_groups': 'single,appears_on',
+            'market': 'TR',
+            'limit': '10',
+            'offset': '5',
+          },
+          options: Options(headers: requestHeaders));
+      return ArtistIdAlbumModel.fromJson(response.data);
+    } catch (e) {
+      log(e.toString());
+    }
+    return null;
+  }
+
+  Future<ArtistIdTopTracksModel?> getArtistIdTopTrack(String? id) async {
+    try {
+      final response = await dio.get("artists/$id/top-tracks",
+          queryParameters: {
+            'q': id,
+            'market': 'TR',
+          },
+          options: Options(headers: requestHeaders));
+      return ArtistIdTopTracksModel.fromJson(response.data);
     } catch (e) {
       log(e.toString());
     }

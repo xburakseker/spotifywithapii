@@ -33,13 +33,18 @@ class _ArtistBannerWidgetState extends State<ArtistBannerWidget> {
               size: 30,
               color: Colors.white,
             )),
-        const Positioned(
+        Positioned(
             top: 35,
             left: 30,
-            child: Icon(
-              Icons.arrow_back,
-              size: 30,
-              color: Colors.white,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: Colors.white,
+              ),
             ))
       ],
     );
