@@ -34,85 +34,111 @@ class _SearchPageState extends State<SearchPage> {
           child: Image.asset("assets/spotifylogo.png"),
         ),
         SearchTextField(),
-        Column(
-          children: [
-            Consumer(
-              builder: (context, GeneralViewModel value, child) {
-                return value.isLoadingSearchArtist
-                    ? Container()
-                    : Container(
-                        alignment: Alignment.center,
-                        width: 100.w,
-                        height: 20.h,
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: 10,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Provider.of<GeneralViewModel>(context,
-                                        listen: false)
-                                    .getArtistWithIdd(
-                                        "${value.searchArtist!.artists!.items![index].id}");
-                                Provider.of<GeneralViewModel>(context,
-                                        listen: false)
-                                    .getArtistIdAlbum(
-                                        "${value.searchArtist!.artists!.items![index].id}");
-                                Provider.of<GeneralViewModel>(context,
-                                        listen: false)
-                                    .getArtistIdTopTrack(
-                                        "${value.searchArtist!.artists!.items![index].id}");
+        SizedBox(
+          height: 76.5.h,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Consumer(
+                  builder: (context, GeneralViewModel value, child) {
+                    return value.isLoadingSearchArtist
+                        ? Container()
+                        : Container(
+                            alignment: Alignment.center,
+                            width: 100.w,
+                            height: 20.h,
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 10,
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Provider.of<GeneralViewModel>(context,
+                                            listen: false)
+                                        .getArtistWithIdd(
+                                            "${value.searchArtist!.artists!.items![index].id}");
+                                    Provider.of<GeneralViewModel>(context,
+                                            listen: false)
+                                        .getArtistIdAlbum(
+                                            "${value.searchArtist!.artists!.items![index].id}");
+                                    Provider.of<GeneralViewModel>(context,
+                                            listen: false)
+                                        .getArtistIdTopTrack(
+                                            "${value.searchArtist!.artists!.items![index].id}");
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ArtistSearchViewPage(),
-                                    ));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ArtistSearchViewPage(),
+                                        ));
+                                  },
+                                  child: value.isLoadingSearchArtist
+                                      ? CircularProgressIndicator()
+                                      : ArtistSearchView(
+                                          artistPhoto: value
+                                                  .searchArtist!
+                                                  .artists!
+                                                  .items![index]
+                                                  .images!
+                                                  .isEmpty
+                                              ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wix.com%2Fwebsite%2Ftemplates%2Fhtml%2Fblank&psig=AOvVaw0rZV3C9lk9aEmaUvyl0rK3&ust=1669711499268000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCLjq-fW-0PsCFQAAAAAdAAAAABAE"
+                                              : "${value.searchArtist!.artists!.items![index].images![0].url}",
+                                          artistName:
+                                              "${value.searchArtist!.artists!.items![index].name}",
+                                        ),
+                                );
                               },
-                              child: value.isLoadingSearchArtist
-                                  ? CircularProgressIndicator()
-                                  : ArtistSearchView(
-                                      artistPhoto:
-                                          "${value.searchArtist!.artists!.items![index].images![0].url}",
-                                      artistName:
-                                          "${value.searchArtist!.artists!.items![index].name}",
-                                    ),
-                            );
-                          },
-                        ),
-                      );
-              },
+                            ),
+                          );
+                  },
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Text(
+                      "Songs",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                Consumer(
+                  builder: (context, GeneralViewModel value, child) {
+                    return value.isLoadingSearchArtist
+                        ? CircularProgressIndicator()
+                        : SizedBox(
+                            width: double.infinity,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.only(top: 15),
+                              itemCount: 10,
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                return SearchArtistProfileSongs(
+                                  songImage:
+                                      "${value.searchArtist!.tracks!.items2![index].album!.images![0].url}",
+                                  artistName:
+                                      "${value.searchArtist!.tracks!.items2![index].name}",
+                                  songName:
+                                      "${value.searchArtist!.tracks!.items2![index].album!.name}",
+                                );
+                              },
+                            ),
+                          );
+                  },
+                )
+              ],
             ),
-            Consumer(
-              builder: (context, GeneralViewModel value, child) {
-                return value.isLoadingArtistIdTopTracks
-                    ? CircularProgressIndicator()
-                    : SizedBox(
-                        width: double.infinity,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.only(top: 15),
-                          itemCount: 10,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return SearchArtistProfileSongs(
-                              songImage:
-                                  "${value.artistIdTopTracks!.tracks![index].album!.images![0].url}",
-                              artistName:
-                                  "${value.artistIdTopTracks!.tracks![index].album!.artists![0].name}",
-                              songName:
-                                  "${value.artistIdTopTracks!.tracks![index].name}",
-                            );
-                          },
-                        ),
-                      );
-              },
-            )
-          ],
+          ),
         ),
       ]),
     );
